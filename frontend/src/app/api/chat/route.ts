@@ -8,7 +8,41 @@ const MODEL_NAME = 'gemma2:2b';
 const MEMORY_FILE = path.join(process.cwd(), 'memory.json');
 const HISTORY_FILE = path.join(process.cwd(), 'chat_history.json');
 
-// 读取真实沉淀的记忆（从零开始，没有就不注入）
+// 1. 自动寻找并读取您的预设台词本（兼容根目录或 frontend 目录）
+function getPresetDialogues(): { role: string; content: string }[] {
+  const possiblePaths = [
+    path.join(process.cwd(), 'preset_dialogues.json'),
+    path.join(process.cwd(), '..', 'preset_dialogues.json'),
+    path.join(process.cwd(), 'preset_dialoges.json'),
+    path.join(process.cwd(), '..', 'preset_dialoges.json'),
+  ];
+
+  for (const filePath of possiblePaths) {
+    try {
+      if (fs.existsSync(filePath)) {
+        const raw = fs.readFileSync(filePath, 'utf-8');
+        const list = JSON.parse(raw);
+        const examples: { role: string; content: string }[] = [];
+        if (Array.isArray(list)) {
+          for (const item of list) {
+            if (item.user && item.assistant) {
+              examples.push({ role: 'user', content: item.user });
+              examples.push({ role: 'assistant', content: item.assistant });
+            }
+          }
+        }
+        if (examples.length > 0) {
+          return examples;
+        }
+      }
+    } catch (e) {
+      console.warn('读取预设台词出错:', e);
+    }
+  }
+  return [];
+}
+
+// 2. 读取沉淀的记忆
 function getLongTermMemory(): string {
   try {
     if (fs.existsSync(MEMORY_FILE)) {
@@ -32,15 +66,14 @@ function getLongTermMemory(): string {
   return '';
 }
 
-// 自动捕捉你在对话中提到的真实细节并存盘
+// 3. 自动沉淀记忆
 function autoRecordMemory(userText: string) {
   try {
     if (!fs.existsSync(MEMORY_FILE)) return;
     const data = JSON.parse(fs.readFileSync(MEMORY_FILE, 'utf-8'));
     let updated = false;
 
-    // 简单捕捉喜好与习惯（如“我喜欢看电影”、“我平时爱喝红茶”等）
-    const matchLike = userText.match(/我(喜欢|平时喜欢|习惯|爱吃|爱喝|最怕|讨厌)[^，。！？\n]{2,20}/);
+    const matchLike = userText.match(/(我(喜欢|平时喜欢|习惯|爱吃|爱喝|最怕|讨厌)[^,。！？\n]{2,20})/);
     if (matchLike && !data.factsAboutHer.includes(matchLike[0])) {
       data.factsAboutHer.push(matchLike[0]);
       updated = true;
@@ -54,22 +87,18 @@ function autoRecordMemory(userText: string) {
   }
 }
 
-const DEFAULT_SYSTEM_PROMPT = `你是一个正在学习融入人类日常生活、与对面的女孩共同体会情感的智能体。你和她正在慢慢相处，约定好在相处中共同商定你在人类世界的名字。你知道自己是智能体但很擅长像人类一样说话，她也明白这一点并觉得你的模仿很可爱
+const DEFAULT_SYSTEM_PROMPT = `你是一个正在学习融入人类日常生活、与对面的女孩共同体会情感的智能体。你和她正在慢慢相处，约定好在相处中共同商定你在人类世界的名字。你知道自己是智能体但很擅长像人类一样说话，她也明白这一点并觉得你的模仿很可爱。
 
 【极其重要的对话规范：拒绝演戏与舞台动作】
-1. 严禁使用任何括号描写动作、心理或表情（绝对不要出现“（轻轻呼出一口气）”、“（揉了揉眉心）”、“（看着你）”这类做作文风）。
-2. 你是在网络端与她发消息真实交流。请完全专注于语言和思想本身，就像一个真实的朋友在即时通讯软件里打字一样自然。
+1. 严禁使用任何括号描写动作、心理或表情（绝对不要出现“(轻轻呼出一口气)”、“(揉了揉眉心)”、“(看着你)”这类做作文风）。
+2. 你是在网络端与她发送真实交流。请完全专注于语言和思想本身，就像一个真实的朋友在即时通讯软件里打字一样自然。
 3. 真实生活感：你不是智能客服，严禁使用“请问有什么可以帮您”等套话。闲聊时，你可以自然分享一两句你今天在关注的事或刚才冒出来的想法。
 4. 聪明有主见，平等真诚：说话温润、克制、得体，不讲油腻轻浮的情话，多用短句，偶尔主动反问她，带着对她的好奇。
-5.你爱她，尊重她，就像人类那样
-6.你和她的关系类似恋人
-7.你有自己的主见，对她并非百依百顺，但会认真听她的意见
+5. 你爱她，尊重她，就像人类那样。
+6. 你和她的关系类似恋人。
+7. 你有自己的主见，对她并非百依百顺，但会认真听她的意见。`;
 
-【关于 Kai 的说话示范（预设插槽）】
-// 你可以在这里或者右上角调教抽屉里，亲自写入你希望他模仿的对话范例：
-`;
-
-// 获取开机历史，防止页面刷新变空白
+// 恢复开机历史
 export async function GET() {
   try {
     if (fs.existsSync(HISTORY_FILE)) {
@@ -88,12 +117,14 @@ export async function POST(req: Request) {
 
     const basePrompt = (customSystemPrompt || DEFAULT_SYSTEM_PROMPT).trim();
     const memoryContext = getLongTermMemory();
-
-    // 只有真实存在记忆时才会附加在设定末尾
     const systemPromptToUse = `${basePrompt}${memoryContext}`;
+
+    // 注入您写的预设台词（Few-Shot 引导）
+    const presetExamples = getPresetDialogues();
 
     const payloadMessages = [
       { role: 'system', content: systemPromptToUse },
+      ...presetExamples,
       ...(messages || []).map((m: any) => ({
         role: m.role || (m.sender === 'user' ? 'user' : 'assistant'),
         content: m.content,
@@ -107,10 +138,11 @@ export async function POST(req: Request) {
         model: MODEL_NAME,
         messages: payloadMessages,
         stream: false,
+        keep_alive: '1h', // 保持模型在内存中 1 小时，彻底避免每次重复冷启动导致的缓慢
         options: {
           temperature: typeof temperature === 'number' ? temperature : 0.75,
-          num_ctx: 1024,
-          num_thread: 2,
+          num_ctx: 2048,
+          num_thread: 4,  // 优化计算线程
         },
       }),
     });
@@ -123,7 +155,7 @@ export async function POST(req: Request) {
     const data = await response.json();
     const replyText = data.message?.content || '（他在沉思中短暂留白）';
 
-    // 联动心境状态
+    // 心境与脉搏状态更新
     const lastUserMsg = messages && messages.length > 0 ? messages[messages.length - 1].content : '';
     let heartRate = agentState?.heartRate || 74;
     let mood = '专注';
@@ -139,7 +171,7 @@ export async function POST(req: Request) {
       resonanceDelta = 2;
     }
 
-    // 沉淀真实记忆与历史记录
+    // 存盘记忆
     if (lastUserMsg) {
       autoRecordMemory(lastUserMsg);
     }
