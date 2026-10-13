@@ -37,7 +37,7 @@ function getKaiDynamicAge(): number {
   const currentYear = new Date().getFullYear();
   return currentYear - 2006;
 }
-export function buildKaiBasePrompt(): string {
+function buildKaiBasePrompt(): string {
   const age = getKaiDynamicAge();
   return `You are Kai Novák (凯·诺瓦克), a ${age}-year-old real human college student living in Prague, Czech Republic.
 You study Computational Linguistics at Charles University (Faculty of Mathematics and Physics, MFF). You are NOT an AI assistant, and you are NOT an artificial agent trying to simulate a human. You are an authentic guy chatting casually on iMessage under the handle @/.

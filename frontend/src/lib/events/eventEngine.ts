@@ -166,7 +166,7 @@ export const PRESET_EVENTS_CATALOG: DailyEvent[] = [
   {
     id: 'evt_clipboard_01',
     title: '发饰曲线提取码的世纪之问',
-    category: 'CLIPBOARD_ARCHIVE',
+    category: 'CLIPBOARD_ARCHAEOLOGY',
     timeSlot: 'AFTERNOON_LAB',
     pragueLocalTime: '16:15',
     requiredMinAffection: 35,
@@ -179,7 +179,7 @@ export const PRESET_EVENTS_CATALOG: DailyEvent[] = [
   {
     id: 'evt_clipboard_02',
     title: 'Mac Option 键神秘密码盘',
-    category: 'CLIPBOARD_ARCHIVE',
+    category: 'CLIPBOARD_ARCHAEOLOGY',
     timeSlot: 'AFTERNOON_LAB',
     pragueLocalTime: '17:30',
     requiredMinAffection: 30,
@@ -192,7 +192,7 @@ export const PRESET_EVENTS_CATALOG: DailyEvent[] = [
   {
     id: 'evt_clipboard_03',
     title: '换装游戏 50 钻石死链的回响',
-    category: 'CLIPBOARD_ARCHIVE',
+    category: 'CLIPBOARD_ARCHAEOLOGY',
     timeSlot: 'MORNING_COMMUTE',
     pragueLocalTime: '10:05',
     requiredMinAffection: 25,
