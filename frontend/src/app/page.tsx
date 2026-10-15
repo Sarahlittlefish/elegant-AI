@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Send } from "lucide-react";
+import { SEED_HISTORY } from "@/lib/data/seedHistory";
 
 interface ChatMessage {
   id: string;
@@ -8,15 +9,15 @@ interface ChatMessage {
   content: string;
 }
 
-// 聊天记录存在浏览器里（换了新的 key，旧版页面留下的记录不会带进来）
-const HISTORY_KEY = "chat_history_v2";
+// 聊天记录存在浏览器里。v3：开场换成了那段真实对话，换新 key 后旧版页面留下的聊天不会带进来
+const HISTORY_KEY = "chat_history_v3_seeded";
 
-// 开场：她当年随手丢进 @/ 的两条剪贴板，对方回了一个「?」
-const OPENING: ChatMessage[] = [
-  { id: "open_0", sender: "user", content: "(3.6-4.3)发饰跟随曲线头发v1.0 提取码: qsmv" },
-  { id: "open_1", sender: "user", content: "¡™£¢∞§¶•ªº–≠«‘“πøˆ¨¥†®´∑œåßƒ©˙∆˚¬…æ÷≥≤µ˜∫√ç√" },
-  { id: "open_2", sender: "kai", content: "?" },
-];
+// 开场：两条剪贴板 + 她写的那段真实对话（见 seedHistory.ts）
+const OPENING: ChatMessage[] = SEED_HISTORY.map((m, i) => ({
+  id: `seed_${i}`,
+  sender: m.sender,
+  content: m.content,
+}));
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<ChatMessage[]>(OPENING);
