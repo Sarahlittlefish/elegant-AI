@@ -1,0 +1,9 @@
+# Xcode 自己生成的个人文件和编译产物，不上 GitHub
+xcuserdata/
+*.xcuserstate
+build/
+DerivedData/
+.DS_Store
+# 万一以后把 Key 放在文件里，也不会被提交
+*.env
+Secrets*.xcconfig

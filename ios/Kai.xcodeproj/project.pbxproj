@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		036E108E08911B74A1514C70 /* seed_history.json in Resources */ = {isa = PBXBuildFile; fileRef = 43D59B599044BCCEAA23ED07 /* seed_history.json */; };
+		0ED409F20F180A15C33A6A27 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990793EB188209429C362D01 /* SettingsView.swift */; };
+		29E3DB3D55656FBF675AAFAC /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB127DCB99481A9ECAC9C7D /* Models.swift */; };
+		312017BB04EB5D80F3EE3EC2 /* ChatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD578C74A67D0378DCFCA00 /* ChatStore.swift */; };
+		3842E11E38DF5B3498D464B7 /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA42D84D4B1D266C9D77D6 /* Persona.swift */; };
+		453044330C854B0BAA85FA4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58B0BFDCD7B33B33EFB9FEEF /* Assets.xcassets */; };
+		5383F459568B5AAD13F59A18 /* KaiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5370B6997C1A400D45619F /* KaiApp.swift */; };
+		555862130D0314E1A124D9D5 /* PingScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3662F2408B5E4C382B31558F /* PingScheduler.swift */; };
+		6233009FBF9C8F776477EEF3 /* ZhipuClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07FD68D633EF8735B59044D /* ZhipuClient.swift */; };
+		73157880AAA819254219B1B3 /* kai_profile.md in Resources */ = {isa = PBXBuildFile; fileRef = 58F8AE5CCC31B89208F6863A /* kai_profile.md */; };
+		9D4943ACFB0F92802E1D5D3C /* PingPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB83527E7720EED5326346C2 /* PingPlanner.swift */; };
+		9EB07A7AEED358D8973E6928 /* KeychainKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE02064A9E3AE632AF5CC83 /* KeychainKeyStore.swift */; };
+		B4DF123D617706F8D295A0BE /* kai_persona_v2.md in Resources */ = {isa = PBXBuildFile; fileRef = 927DE38CFBD3D264956CCEA1 /* kai_persona_v2.md */; };
+		E04ABDAE4E61F40FA6C8D8F8 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F510BBF0BC903EB3A650A6 /* ChatView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		09F54CD586190BB0D882A9E1 /* Kai.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Kai.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DE02064A9E3AE632AF5CC83 /* KeychainKeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKeyStore.swift; sourceTree = "<group>"; };
+		3662F2408B5E4C382B31558F /* PingScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingScheduler.swift; sourceTree = "<group>"; };
+		3D5370B6997C1A400D45619F /* KaiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaiApp.swift; sourceTree = "<group>"; };
+		43D59B599044BCCEAA23ED07 /* seed_history.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = seed_history.json; sourceTree = "<group>"; };
+		58B0BFDCD7B33B33EFB9FEEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58F8AE5CCC31B89208F6863A /* kai_profile.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = kai_profile.md; path = ../kai_profile.md; sourceTree = "<group>"; };
+		927DE38CFBD3D264956CCEA1 /* kai_persona_v2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = kai_persona_v2.md; path = ../kai_persona_v2.md; sourceTree = "<group>"; };
+		94F510BBF0BC903EB3A650A6 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		990793EB188209429C362D01 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AFD578C74A67D0378DCFCA00 /* ChatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStore.swift; sourceTree = "<group>"; };
+		B1CA42D84D4B1D266C9D77D6 /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
+		CB83527E7720EED5326346C2 /* PingPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingPlanner.swift; sourceTree = "<group>"; };
+		DDB127DCB99481A9ECAC9C7D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		E07FD68D633EF8735B59044D /* ZhipuClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhipuClient.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2A4F8B343BBBA60360D8495C = {
+			isa = PBXGroup;
+			children = (
+				7E7DB6BA43B00FCF7C2FE679 /* Kai */,
+				A2149768FA0FFFAD785E554C /* Persona */,
+				577539E3D3A8D1062F3C171F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		577539E3D3A8D1062F3C171F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				09F54CD586190BB0D882A9E1 /* Kai.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7E7DB6BA43B00FCF7C2FE679 /* Kai */ = {
+			isa = PBXGroup;
+			children = (
+				58B0BFDCD7B33B33EFB9FEEF /* Assets.xcassets */,
+				AFD578C74A67D0378DCFCA00 /* ChatStore.swift */,
+				94F510BBF0BC903EB3A650A6 /* ChatView.swift */,
+				3D5370B6997C1A400D45619F /* KaiApp.swift */,
+				0DE02064A9E3AE632AF5CC83 /* KeychainKeyStore.swift */,
+				DDB127DCB99481A9ECAC9C7D /* Models.swift */,
+				B1CA42D84D4B1D266C9D77D6 /* Persona.swift */,
+				CB83527E7720EED5326346C2 /* PingPlanner.swift */,
+				3662F2408B5E4C382B31558F /* PingScheduler.swift */,
+				990793EB188209429C362D01 /* SettingsView.swift */,
+				E07FD68D633EF8735B59044D /* ZhipuClient.swift */,
+				C4824B0D89134BA60527E034 /* Resources */,
+			);
+			path = Kai;
+			sourceTree = "<group>";
+		};
+		A2149768FA0FFFAD785E554C /* Persona */ = {
+			isa = PBXGroup;
+			children = (
+				927DE38CFBD3D264956CCEA1 /* kai_persona_v2.md */,
+				58F8AE5CCC31B89208F6863A /* kai_profile.md */,
+			);
+			name = Persona;
+			sourceTree = "<group>";
+		};
+		C4824B0D89134BA60527E034 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				43D59B599044BCCEAA23ED07 /* seed_history.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D330620425F0141E36FED75D /* Kai */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F470AD1EF87068FC6777A04 /* Build configuration list for PBXNativeTarget "Kai" */;
+			buildPhases = (
+				B19263FF71C5ECDF1EA892A6 /* Sources */,
+				43B39D424E9F0A973E80551D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kai;
+			packageProductDependencies = (
+			);
+			productName = Kai;
+			productReference = 09F54CD586190BB0D882A9E1 /* Kai.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C097043BCD276F1BBAD0BCDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					D330620425F0141E36FED75D = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1EE90DEEC2EA9DD0B559EB27 /* Build configuration list for PBXProject "Kai" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 2A4F8B343BBBA60360D8495C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 577539E3D3A8D1062F3C171F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D330620425F0141E36FED75D /* Kai */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43B39D424E9F0A973E80551D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				453044330C854B0BAA85FA4E /* Assets.xcassets in Resources */,
+				B4DF123D617706F8D295A0BE /* kai_persona_v2.md in Resources */,
+				73157880AAA819254219B1B3 /* kai_profile.md in Resources */,
+				036E108E08911B74A1514C70 /* seed_history.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B19263FF71C5ECDF1EA892A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				312017BB04EB5D80F3EE3EC2 /* ChatStore.swift in Sources */,
+				E04ABDAE4E61F40FA6C8D8F8 /* ChatView.swift in Sources */,
+				5383F459568B5AAD13F59A18 /* KaiApp.swift in Sources */,
+				9EB07A7AEED358D8973E6928 /* KeychainKeyStore.swift in Sources */,
+				29E3DB3D55656FBF675AAFAC /* Models.swift in Sources */,
+				3842E11E38DF5B3498D464B7 /* Persona.swift in Sources */,
+				9D4943ACFB0F92802E1D5D3C /* PingPlanner.swift in Sources */,
+				555862130D0314E1A124D9D5 /* PingScheduler.swift in Sources */,
+				0ED409F20F180A15C33A6A27 /* SettingsView.swift in Sources */,
+				6233009FBF9C8F776477EEF3 /* ZhipuClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3529B94459C8B20E3E8B0ABC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4E6D769B2B3107D14FCA9357 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "@/";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sarahlittlefish.kaichat;
+				PRODUCT_NAME = Kai;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		A3FE87BCBA342E5769D98C6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		EFFDBA5538D5B61D04FF25E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "@/";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sarahlittlefish.kaichat;
+				PRODUCT_NAME = Kai;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1EE90DEEC2EA9DD0B559EB27 /* Build configuration list for PBXProject "Kai" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3FE87BCBA342E5769D98C6A /* Debug */,
+				3529B94459C8B20E3E8B0ABC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6F470AD1EF87068FC6777A04 /* Build configuration list for PBXNativeTarget "Kai" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E6D769B2B3107D14FCA9357 /* Debug */,
+				EFFDBA5538D5B61D04FF25E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C097043BCD276F1BBAD0BCDC /* Project object */;
+}
