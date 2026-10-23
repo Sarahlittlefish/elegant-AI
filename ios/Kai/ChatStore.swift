@@ -6,10 +6,10 @@ import FoundationNetworking
 import Combine
 #endif
 
-/// 存放智谱 Key 的地方。iPad 上用钥匙串（KeychainKeyStore），不写进代码、不上 GitHub。
+/// 存放魔搭令牌和智谱 Key 的地方，两个分开存。iPad 上用钥匙串（KeychainKeyStore），不写进代码、不上 GitHub。
 protocol KeyStoring {
-    func loadKey() -> String
-    func saveKey(_ key: String)
+    func loadKey(for provider: Provider) -> String
+    func saveKey(_ key: String, for provider: Provider)
 }
 
 /// 聊天记录存在 iPad 本地的一个 JSON 文件里，重开 app 还在。
@@ -39,7 +39,12 @@ struct HistoryFile {
 final class ChatStore: ObservableObject {
     @Published private(set) var messages: [ChatMessage]
     @Published private(set) var isLoading = false
+    /// 现在选的模型要用的那个令牌 / Key 填了没有。
     @Published private(set) var hasKey: Bool
+    /// 设置里选的模型，默认魔搭 GLM-5.2。存在 iPad 上，重装也还在。
+    @Published private(set) var selectedModel: ModelOption
+    /// 上一条回复真正是哪个模型回的（主模型不行时会自动换备用）。
+    @Published private(set) var lastReplyModel: ModelOption?
 
     private let history: HistoryFile
     private let seed: [ChatMessage]
@@ -47,17 +52,21 @@ final class ChatStore: ObservableObject {
     private let systemPromptBase: String?
     private let loadError: String?
     private let session: URLSession
+    private let defaults: UserDefaults
+    private static let selectedModelKey = "selected_model"
 
     init(history: HistoryFile,
          seed: [SeedMessage],
          keyStore: KeyStoring,
          systemPrompt: Result<String, Error>,
-         session: URLSession = .shared) {
+         session: URLSession = .shared,
+         defaults: UserDefaults = .standard) {
         let seedMessages = SeedHistory.messages(from: seed)
         self.history = history
         self.seed = seedMessages
         self.keyStore = keyStore
         self.session = session
+        self.defaults = defaults
         switch systemPrompt {
         case .success(let text):
             systemPromptBase = text
@@ -67,21 +76,38 @@ final class ChatStore: ObservableObject {
             loadError = error.localizedDescription
         }
         messages = history.load() ?? seedMessages
-        hasKey = !keyStore.loadKey().trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let model = defaults.string(forKey: Self.selectedModelKey).flatMap(ModelOption.init(rawValue:))
+            ?? ModelOption.defaultOption
+        selectedModel = model
+        hasKey = !keyStore.loadKey(for: model.provider).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
-    // MARK: Key
+    // MARK: Key & model
 
-    var maskedKey: String {
-        let key = keyStore.loadKey()
-        guard key.count > 8 else { return key.isEmpty ? "" : "已保存" }
+    func hasKey(for provider: Provider) -> Bool {
+        !keyStore.loadKey(for: provider).trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    func maskedKey(for provider: Provider) -> String {
+        let key = keyStore.loadKey(for: provider)
+        guard key.count > 8 else { return key.isEmpty ? "还没填" : "已保存" }
         return String(key.prefix(4)) + "••••" + String(key.suffix(4))
     }
 
-    func saveKey(_ key: String) {
+    func saveKey(_ key: String, for provider: Provider) {
         let trimmed = key.trimmingCharacters(in: .whitespacesAndNewlines)
-        keyStore.saveKey(trimmed)
-        hasKey = !trimmed.isEmpty
+        keyStore.saveKey(trimmed, for: provider)
+        refreshHasKey()
+    }
+
+    func selectModel(_ model: ModelOption) {
+        selectedModel = model
+        defaults.set(model.rawValue, forKey: Self.selectedModelKey)
+        refreshHasKey()
+    }
+
+    private func refreshHasKey() {
+        hasKey = hasKey(for: selectedModel.provider)
     }
 
     // MARK: Chat
@@ -98,11 +124,17 @@ final class ChatStore: ObservableObject {
             guard let base = systemPromptBase else {
                 throw PersonaError.missing(loadError ?? "人设文件")
             }
-            let client = ZhipuClient(apiKey: keyStore.loadKey(), session: session)
-            let reply = try await client.reply(systemPrompt: base + "\n\n" + TimeContext.line(),
-                                               messages: messages)
+            var keys: [Provider: String] = [:]
+            for provider in Provider.allCases { keys[provider] = keyStore.loadKey(for: provider) }
+            let (reply, usedModel) = try await ModelClient.replyWithFallback(
+                primary: selectedModel,
+                keys: keys,
+                systemPrompt: base + "\n\n" + TimeContext.line(),
+                messages: messages,
+                session: session)
+            lastReplyModel = usedModel
             let now = Date()
-            append(ZhipuClient.splitBubbles(reply).map { ChatMessage(sender: .kai, content: $0, date: now) })
+            append(ModelClient.splitBubbles(reply).map { ChatMessage(sender: .kai, content: $0, date: now) })
         } catch {
             append([ChatMessage(sender: .kai,
                                 content: "[消息没发出去: \(error.localizedDescription)]",

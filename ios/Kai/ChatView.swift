@@ -24,7 +24,7 @@ struct ChatView: View {
             SettingsView()
                 .environmentObject(store)
         }
-        .fullScreenCover(isPresented: Binding(get: { !store.hasKey }, set: { _ in })) {
+        .fullScreenCover(isPresented: Binding(get: { !store.hasKey && !showSettings }, set: { _ in })) {
             KeySetupView()
                 .environmentObject(store)
         }

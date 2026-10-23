@@ -1,22 +1,28 @@
 import Foundation
 import Security
 
-/// 智谱 Key 存在 iPad 的钥匙串里：只在这台 iPad 上，不在代码里，不会上 GitHub。
-/// 每 7 天用 Xcode 重装一次也不会丢，不用重新填。
+/// 魔搭令牌和智谱 Key 都存在 iPad 的钥匙串里：只在这台 iPad 上，不在代码里，不会上 GitHub。
+/// 每 7 天用 Xcode 重装一次也不会丢，不用重新填。智谱 Key 还用原来那个位置，升级后不用重填。
 struct KeychainKeyStore: KeyStoring {
     var service = "com.sarahlittlefish.kaichat"
-    var account = "zhipu_api_key"
 
-    private var baseQuery: [String: Any] {
+    static func account(for provider: Provider) -> String {
+        switch provider {
+        case .zhipu: return "zhipu_api_key"
+        case .modelscope: return "modelscope_token"
+        }
+    }
+
+    private func baseQuery(_ provider: Provider) -> [String: Any] {
         [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
+            kSecAttrAccount as String: Self.account(for: provider),
         ]
     }
 
-    func loadKey() -> String {
-        var query = baseQuery
+    func loadKey(for provider: Provider) -> String {
+        var query = baseQuery(provider)
         query[kSecReturnData as String] = true
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         var item: CFTypeRef?
@@ -27,10 +33,10 @@ struct KeychainKeyStore: KeyStoring {
         return key
     }
 
-    func saveKey(_ key: String) {
-        SecItemDelete(baseQuery as CFDictionary)
+    func saveKey(_ key: String, for provider: Provider) {
+        SecItemDelete(baseQuery(provider) as CFDictionary)
         guard !key.isEmpty else { return }
-        var attributes = baseQuery
+        var attributes = baseQuery(provider)
         attributes[kSecValueData as String] = Data(key.utf8)
         attributes[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
         SecItemAdd(attributes as CFDictionary, nil)
